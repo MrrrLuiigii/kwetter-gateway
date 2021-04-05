@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 
 import axios from "axios";
 
+//TODO: exception response does not include message
 import UnauthorizedException from "./exceptions/unauthorized.exception";
 import BadRequestException from "./exceptions/badRequest.exception";
 
@@ -13,6 +14,9 @@ export async function authenticate(
 	req: Request,
 	res: Response
 ) {
+	//TODO: dont do this for /auth
+	console.log(req.path);
+
 	if (!req.headers["authorization"])
 		return res
 			.status(400)
