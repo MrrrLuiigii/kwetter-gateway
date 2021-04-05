@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import Controller from "./controllers/controller";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import ProxyRoute from "./proxyRoutes/proxyRoute";
+import { authenticate } from "./utils/authenticationMiddleware";
 
 class App {
 	private app: Application;
@@ -46,7 +47,8 @@ class App {
 				p.path,
 				createProxyMiddleware({
 					target: p.target,
-					changeOrigin: true
+					changeOrigin: true,
+					onProxyReq: authenticate
 				})
 			);
 		});

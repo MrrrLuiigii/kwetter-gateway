@@ -13,9 +13,9 @@ import { AuthProxy, ProfileProxy } from "./proxyRoutes/proxyRoutes";
 const main = async () => {
 	const app = new App();
 
+	app.initializeProxyMiddlewares([new AuthProxy(), new ProfileProxy()]);
 	app.initializeControllers([new GatewayController()]);
 	app.initializeMiddlewares();
-	app.initializeProxyMiddlewares([new AuthProxy(), new ProfileProxy()]);
 	app.listen();
 };
 
