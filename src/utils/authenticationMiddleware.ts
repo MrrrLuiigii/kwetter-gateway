@@ -14,24 +14,33 @@ export async function authenticate(
 	req: Request,
 	res: Response
 ) {
-	//TODO: dont do this for /auth
-	console.log(req.path);
+	if (req.path.startsWith("/auth")) return true;
 
-	if (!req.headers["authorization"])
-		return res
+	if (!req.headers["authorization"]) {
+		res
 			.status(400)
-			.send(new BadRequestException("No authorization headers present..."));
+			// .send(new BadRequestException("No authorization headers present..."));
+			.send({ status: 400, message: "No authorization headers present..." });
+		return proxyReq.abort();
+	}
 
-	const authenticated = await axios
+	const { status, decoded } = await axios
 		.get(AUTH_URL, {
 			headers: { authorization: req.headers["authorization"] }
 		})
-		.then((response) => (response.status === 200 ? true : false))
-		.catch(() => false);
+		.then((response) =>
+			response.status === 200
+				? { status: response.data.status, decoded: response.data.decoded }
+				: { status: false, decoded: undefined }
+		)
+		.catch(() => ({ status: false, decoded: undefined }));
 
-	if (!authenticated) {
-		return res.status(401).send(new UnauthorizedException("Invalid token..."));
+	if (!status) {
+		// return res.status(401).send(new UnauthorizedException("Invalid token..."));
+		res.status(401).send({ status: 401, message: "Invalid token..." });
+		return proxyReq.abort();
 	}
 
+	// proxyReq.setHeader("decoded", JSON.stringify(decoded));
 	return true;
 }

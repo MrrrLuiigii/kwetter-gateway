@@ -5,7 +5,12 @@ export class AuthProxy implements ProxyRoute {
 	public target: string = "http://localhost:3001";
 }
 
+// export class MailProxy implements ProxyRoute {
+// 	public path: string = "/mail";
+// 	public target: string = "http://localhost:3002"
+// }
+
 export class ProfileProxy implements ProxyRoute {
 	public path: string = "/profile";
-	public target: string = "http://localhost:3002";
+	public target: string = "http://localhost:3003";
 }

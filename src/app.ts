@@ -10,10 +10,10 @@ class App {
 	private app: Application;
 
 	private frontendHost: string = process.env.FRONTEND_HOST!;
-	private socketHost: string = process.env.SOCKET_HOST!;
 
 	constructor() {
 		this.app = express();
+		this.allowCors();
 	}
 
 	public initializeControllers(controllers: Controller[]) {
@@ -23,7 +23,14 @@ class App {
 	}
 
 	public initializeMiddlewares() {
-		const allowedOrigins: string[] = [this.frontendHost, this.socketHost];
+		this.app.use(express.json());
+		this.app.use(cookieParser());
+	}
+
+	private allowCors() {
+		const allowedOrigins: string[] = [this.frontendHost];
+
+		console.log(allowedOrigins);
 
 		this.app.use(
 			cors({
@@ -36,9 +43,6 @@ class App {
 				}
 			})
 		);
-
-		this.app.use(express.json());
-		this.app.use(cookieParser());
 	}
 
 	public initializeProxyMiddlewares(proxyRoutes: ProxyRoute[]) {
