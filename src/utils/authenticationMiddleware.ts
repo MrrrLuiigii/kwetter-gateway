@@ -14,6 +14,7 @@ export async function authenticate(
 	req: Request,
 	res: Response
 ) {
+	// return true;
 	if (req.path.startsWith("/auth")) return true;
 
 	if (!req.headers["authorization"]) {
@@ -21,7 +22,7 @@ export async function authenticate(
 			.status(400)
 			// .send(new BadRequestException("No authorization headers present..."));
 			.send({ status: 400, message: "No authorization headers present..." });
-		return proxyReq.abort();
+		return proxyReq.end();
 	}
 
 	const { status, decoded } = await axios
@@ -38,9 +39,9 @@ export async function authenticate(
 	if (!status) {
 		// return res.status(401).send(new UnauthorizedException("Invalid token..."));
 		res.status(401).send({ status: 401, message: "Invalid token..." });
-		return proxyReq.abort();
+		return proxyReq.end();
 	}
 
-	// proxyReq.setHeader("decoded", JSON.stringify(decoded));
+	proxyReq.setHeader("decoded", JSON.stringify(decoded));
 	return true;
 }
