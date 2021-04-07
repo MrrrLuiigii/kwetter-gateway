@@ -29,9 +29,6 @@ class App {
 
 	private allowCors() {
 		const allowedOrigins: string[] = [this.frontendHost];
-
-		console.log(allowedOrigins);
-
 		this.app.use(
 			cors({
 				origin: (origin, callback) => {
@@ -45,14 +42,15 @@ class App {
 		);
 	}
 
+	//TODO: async await bug
 	public initializeProxyMiddlewares(proxyRoutes: ProxyRoute[]) {
-		proxyRoutes.forEach((p) => {
+		proxyRoutes.forEach(async (p) => {
 			this.app.use(
 				p.path,
-				createProxyMiddleware({
+				await createProxyMiddleware({
 					target: p.target,
 					changeOrigin: true,
-					onProxyReq: authenticate
+					onProxyReq: await authenticate
 				})
 			);
 		});

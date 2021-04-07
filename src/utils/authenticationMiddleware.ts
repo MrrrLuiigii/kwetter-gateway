@@ -14,7 +14,7 @@ export async function authenticate(
 	req: Request,
 	res: Response
 ) {
-	// return true;
+	return;
 	if (req.path.startsWith("/auth")) return true;
 
 	if (!req.headers["authorization"]) {
