@@ -8,12 +8,16 @@ import validateEnv from "./utils/validation/validateEnv";
 // import GatewayController from "./controllers/gatewayController";
 
 //proxyRoutes
-import { AuthProxy, ProfileProxy } from "./proxyRoutes/proxyRoutes";
+import { AuthProxy, ProfileProxy, TrendProxy } from "./proxyRoutes/proxyRoutes";
 
 const main = async () => {
 	const app = new App();
 
-	app.initializeProxyMiddlewares([new AuthProxy(), new ProfileProxy()]);
+	app.initializeProxyMiddlewares([
+		new AuthProxy(),
+		new ProfileProxy(),
+		new TrendProxy()
+	]);
 	// app.initializeMiddlewares();
 	// app.initializeControllers([new GatewayController()]);
 	app.listen();

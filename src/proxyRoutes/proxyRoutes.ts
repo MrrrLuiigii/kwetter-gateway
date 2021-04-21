@@ -14,3 +14,8 @@ export class ProfileProxy implements ProxyRoute {
 	public path: string = "/profile";
 	public target: string = "http://localhost:3003";
 }
+
+export class TrendProxy implements ProxyRoute {
+	public path: string = "/trend";
+	public target: string = "http://localhost:3004";
+}
