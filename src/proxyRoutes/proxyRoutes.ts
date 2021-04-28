@@ -19,3 +19,8 @@ export class TrendProxy implements ProxyRoute {
 	public path: string = "/trend";
 	public target: string = "http://localhost:3004";
 }
+
+export class KweetProxy implements ProxyRoute {
+	public path: string = "/kweet";
+	public target: string = "http://localhost:3005";
+}
