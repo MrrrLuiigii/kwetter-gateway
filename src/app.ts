@@ -47,10 +47,10 @@ class App {
 		proxyRoutes.forEach(async (p) => {
 			this.app.use(
 				p.path,
-				await createProxyMiddleware({
+				createProxyMiddleware({
 					target: p.target,
-					changeOrigin: true,
-					onProxyReq: await authenticate
+					changeOrigin: true
+					// onProxyReq: await authenticate
 				})
 			);
 		});
