@@ -24,3 +24,8 @@ export class KweetProxy implements ProxyRoute {
 	public path: string = "/kweet";
 	public target: string = "http://localhost:3005";
 }
+
+export class FollowProxy implements ProxyRoute {
+	public path: string = "/follow";
+	public target: string = "http://localhost:3006";
+}

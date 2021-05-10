@@ -10,6 +10,7 @@ import validateEnv from "./utils/validation/validateEnv";
 //proxyRoutes
 import {
 	AuthProxy,
+	FollowProxy,
 	KweetProxy,
 	ProfileProxy,
 	TrendProxy
@@ -22,7 +23,8 @@ const main = async () => {
 		new AuthProxy(),
 		new ProfileProxy(),
 		new TrendProxy(),
-		new KweetProxy()
+		new KweetProxy(),
+		new FollowProxy()
 	]);
 	// app.initializeMiddlewares();
 	// app.initializeControllers([new GatewayController()]);
