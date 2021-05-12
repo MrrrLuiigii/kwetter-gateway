@@ -12,6 +12,7 @@ import {
 	AuthProxy,
 	FollowProxy,
 	KweetProxy,
+	MentionProxy,
 	ProfileProxy,
 	TrendProxy
 } from "./proxyRoutes/proxyRoutes";
@@ -24,7 +25,8 @@ const main = async () => {
 		new ProfileProxy(),
 		new TrendProxy(),
 		new KweetProxy(),
-		new FollowProxy()
+		new FollowProxy(),
+		new MentionProxy()
 	]);
 	// app.initializeMiddlewares();
 	// app.initializeControllers([new GatewayController()]);
