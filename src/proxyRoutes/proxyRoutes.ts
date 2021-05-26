@@ -30,7 +30,7 @@ export class FollowProxy implements ProxyRoute {
 	public target: string = "http://localhost:3006";
 }
 
-export class MentionProxy implements ProxyRoute {
-	public path: string = "/mention";
+export class LikeProxy implements ProxyRoute {
+	public path: string = "/like";
 	public target: string = "http://localhost:3007";
 }

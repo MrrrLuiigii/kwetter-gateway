@@ -4,15 +4,12 @@ import App from "./app";
 import "dotenv/config";
 import validateEnv from "./utils/validation/validateEnv";
 
-//controllers
-// import GatewayController from "./controllers/gatewayController";
-
 //proxyRoutes
 import {
 	AuthProxy,
 	FollowProxy,
 	KweetProxy,
-	MentionProxy,
+	LikeProxy,
 	ProfileProxy,
 	TrendProxy
 } from "./proxyRoutes/proxyRoutes";
@@ -26,10 +23,9 @@ const main = async () => {
 		new TrendProxy(),
 		new KweetProxy(),
 		new FollowProxy(),
-		new MentionProxy()
+		new LikeProxy()
 	]);
-	// app.initializeMiddlewares();
-	// app.initializeControllers([new GatewayController()]);
+
 	app.listen();
 };
 
