@@ -6,7 +6,7 @@ COPY package.json .
 RUN npm install
 ADD . /Kwetter/apps/gateway
 
-ENV PORT ${PORT}
+ENV PORT_GATEWAY ${PORT_GATEWAY}
 ENV FRONTEND_HOST ${FRONTEND_HOST}
 
 RUN npm run build
