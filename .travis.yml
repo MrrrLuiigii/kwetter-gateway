@@ -1,0 +1,28 @@
+language: node_js
+
+node_js:
+  - 12
+
+cache:
+  directories:
+    - node_modules
+
+services:
+  - docker
+
+branches:
+only:
+  - master
+
+after_success:
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin docker.io
+  - docker image build -t $DOCKER_USERNAME/kwetter-gateway:latest -f kwetter-gateway.Dockerfile .
+  - docker image push $DOCKER_USERNAME/kwetter-gateway:latest
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh success $WEBHOOK_URL
+
+after_failure:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL
