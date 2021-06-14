@@ -57,7 +57,9 @@ class App {
 	}
 
 	public listen() {
-		const port: number = Number(process.env.PORT_GATEWAY || 3000);
+		const port: number = Number(
+			process.env.PORT || process.env.PORT_GATEWAY || 3000
+		);
 		this.app.listen(port, () => {
 			console.log(`Server is listening on port ${port}...`);
 		});
