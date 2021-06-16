@@ -63,9 +63,7 @@ class App {
 				p.path,
 				createProxyMiddleware({
 					target: p.target,
-					changeOrigin: true,
-					timeout: 120000,
-					proxyTimeout: 120000
+					changeOrigin: true
 					// onProxyReq: await authenticate
 				})
 			);
