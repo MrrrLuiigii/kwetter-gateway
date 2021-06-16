@@ -10,6 +10,12 @@ class App {
 	private app: Application;
 
 	private frontendHost: string = process.env.FRONTEND_HOST!;
+	private authHost: string = process.env.AUTH_SERVICE_HOST!;
+	private profileHost: string = process.env.PROFILE_SERVICE_HOST!;
+	private trendHost: string = process.env.TREND_SERVICE_HOST!;
+	private kweetHost: string = process.env.KWEET_SERVICE_HOST!;
+	private followHost: string = process.env.FOLLOW_SERVICE_HOST!;
+	private likeHost: string = process.env.LIKE_SERVICE_HOST!;
 
 	constructor() {
 		this.app = express();
@@ -28,7 +34,15 @@ class App {
 	}
 
 	private allowCors() {
-		const allowedOrigins: string[] = [this.frontendHost];
+		const allowedOrigins: string[] = [
+			this.frontendHost,
+			this.authHost,
+			this.profileHost,
+			this.trendHost,
+			this.kweetHost,
+			this.followHost,
+			this.likeHost
+		];
 		this.app.use(
 			cors({
 				origin: (origin, callback) => {
